@@ -2,7 +2,7 @@
     "name": "readnovel",
     "displayName": "readNovel",
     "description": "",
-    "version": "0.0.1",
+    "version": "0.9.9",
     "engines": {
         "vscode": "^1.61.0"
     },
@@ -19,7 +19,24 @@
                 "command": "readnovel.helloWorld",
                 "title": "Hello World"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "ReadNovel",
+            "type": "object",
+            "properties": {
+                "readNovel.filePath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "path"
+                },
+                "readNovel.annotationRule": {
+                    "type": "string",
+                    "default": "//$",
+                    "suggestions": "xx",
+                    "description": "rule"
+                }
+            }
+        }
     },
     "scripts": {
         "vscode:prepublish": "yarn run compile",

@@ -1,28 +1,70 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode'
+import * as fs from 'fs'
 
-// this method is called when your extension is activated
-// your extension is activated the very first time the command is executed
-export function activate(context: vscode.ExtensionContext) {
-    // Use the console to output diagnostic information (console.log) and errors (console.error)
-    // This line of code will only be executed once when your extension is activated
-    console.log('Congratulations, your extension "readnovel" is now active!')
+const log = console.log.bind(console)
 
-    // The command has been defined in the package.json file
-    // Now provide the implementation of the command with registerCommand
-    // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand(
-        'readnovel.helloWorld',
-        () => {
-            // The code you place here will be executed every time your command is executed
-            // Display a message box to the user
-            vscode.window.showInformationMessage('Hello World from readNovel!')
-        },
-    )
+const readFile = (path: string): string => {
+    log('path is ', path)
+    let data:string = ''
+    try {
+        data = fs.readFileSync(path, 'utf-8')
+    } catch (error) {
+        console.error(error)
+    }
+    return data
+}
 
+const writeFile = (path: string, data: string): void => {
+    fs.writeFileSync(path, data)
+}
+
+// 传入命令和回调函数，注册命令
+const registerCommand = (command: string, callback: any) => {
+    vscode.commands.registerCommand(command, callback)
+}
+
+// 返回插件设置
+// Path 是文件路径，例如：D:\Josh\xcuo\abc.txt
+// annotationRule 是注释规则， 例如 /* content */ 或 <!-- content -->
+const extensionConfig = (): config => {
+    let config = vscode.workspace.getConfiguration()
+    let path = config.get('readNovel.filePath') as string
+    let annotationRule = config.get('readNovel.annotationRule') as string
+    return {
+        path,
+        annotationRule,
+    }
+}
+
+const register = (context: vscode.ExtensionContext): void => {
+    // 注册 command：readNovel 命令
+    log('register start')
+    let command: string = 'readnovel.helloWorld'
+    let config: config = extensionConfig()
+    let action = (): void => {
+        log('action')
+        if (config.path === '') {
+            console.error('路径不能为空')
+            return
+        }
+        log('readFile before')
+        let data: string = readFile(config.path)
+        log('readFile after')
+        log(data)
+        vscode.window.showInformationMessage('Hello World from readNovel!')
+    }
+    let disposable: any = registerCommand(command, action)
+    
     context.subscriptions.push(disposable)
+    log('register done')
+}
+
+const activate = (context: vscode.ExtensionContext) => {
+    register(context)
+
 }
 
 // this method is called when your extension is deactivated
-export function deactivate() {}
+const deactivate = () => {}
+
+export { activate, deactivate }
