@@ -1,5 +1,5 @@
 {
-    "name": "readnovel",
+    "name": "readNovel",
     "displayName": "readNovel",
     "description": "",
     "version": "0.9.9",
@@ -10,30 +10,78 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:readnovel.helloWorld"
+        "onCommand:readNovel.setup"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "readnovel.helloWorld",
-                "title": "Hello World"
+                "command": "readNovel.setup",
+                "title": "readNovel_setup",
+                "description": "运行"
+            },
+            {
+                "command": "readNovel.nextPage",
+                "title": "readNovel_nextPage",
+                "description": "下一页"
+            },
+            {
+                "command": "readNovel.prevPage",
+                "title": "readNovel_prevPage",
+                "description": "上一页"
+            },
+            {
+                "command": "readNovel.clear",
+                "title": "readNovel_clear",
+                "description": "清空注释"
+            }
+        ],
+        "keybindings": [
+            {
+                "command": "readNovel.nextPage",
+                "key": "alt+w",
+                "mac": "cmd+w",
+                "linux": "meta+w",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "readNovel.prevPage",
+                "key": "alt+q",
+                "mac": "cmd+q",
+                "linux": "meta+q",
+                "when": "editorTextFocus"
+            },
+            {
+                "command": "readNovel.clear",
+                "key": "alt+e",
+                "mac": "cmd+e",
+                "linux": "meta+e",
+                "when": "editorTextFocus"
             }
         ],
         "configuration": {
-            "title": "ReadNovel",
+            "title": "readNovel",
             "type": "object",
             "properties": {
                 "readNovel.filePath": {
                     "type": "string",
                     "default": "",
-                    "description": "path"
+                    "description": "文件的绝对路径"
                 },
                 "readNovel.annotationRule": {
                     "type": "string",
-                    "default": "//$",
-                    "suggestions": "xx",
-                    "description": "rule"
+                    "default": "// $",
+                    "description": "注释规则"
+                },
+                "readNovel.startingPosition": {
+                    "type": "number",
+                    "default": 0,
+                    "description": "书签"
+                },
+                "readNovel.amount": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "一次看几行"
                 }
             }
         }
