@@ -33,7 +33,7 @@
             {
                 "command": "readNovel.clear",
                 "title": "readNovel_clear",
-                "description": "清空注释"
+                "description": "老板来了"
             }
         ],
         "keybindings": [
@@ -66,19 +66,19 @@
                 "readNovel.filePath": {
                     "type": "string",
                     "default": "",
-                    "description": "文件的绝对路径"
+                    "description": "文件的绝对路径（D:/Josh/xcuo/abc.txt）"
                 },
                 "readNovel.annotationRule": {
                     "type": "string",
-                    "default": "// $",
-                    "description": "注释规则"
+                    "default": "/* $ */",
+                    "description": "注释规则（// dbpochqs）"
                 },
                 "readNovel.startingPosition": {
                     "type": "number",
                     "default": 0,
-                    "description": "书签"
+                    "description": "起始位置（行）"
                 },
-                "readNovel.amount": {
+                "readNovel.step": {
                     "type": "number",
                     "default": 1,
                     "description": "一次看几行"
