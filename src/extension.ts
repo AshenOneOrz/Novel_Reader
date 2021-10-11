@@ -160,7 +160,6 @@ const NovelReader = class {
     }
 
     registerCommands(): void {
-        let context = this.context
         // 注册所有事件
         this.registerOpen()
         this.registerNextPage()
