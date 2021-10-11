@@ -2,7 +2,9 @@
     "name": "readNovel",
     "displayName": "readNovel",
     "description": "",
-    "version": "0.9.9",
+    "version": "1.0.0",
+    "publisher": "Zelda",
+    "repository": "https://github.com/AshenOneOrz/Read_Novel",
     "engines": {
         "vscode": "^1.61.0"
     },
