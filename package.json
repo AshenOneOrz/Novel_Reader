@@ -1,7 +1,7 @@
 {
     "name": "readNovel",
     "displayName": "readNovel",
-    "description": "",
+    "description": "TXT格式小说阅读器",
     "version": "1.0.0",
     "publisher": "Zelda",
     "repository": "https://github.com/AshenOneOrz/Read_Novel",
@@ -12,14 +12,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:readNovel.setup"
+        "onCommand:readNovel.open"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "readNovel.setup",
-                "title": "readNovel_setup",
+                "command": "readNovel.open",
+                "title": "readNovel_open",
                 "description": "运行"
             },
             {
@@ -35,7 +35,7 @@
             {
                 "command": "readNovel.clear",
                 "title": "readNovel_clear",
-                "description": "老板来了"
+                "description": "清空"
             }
         ],
         "keybindings": [
@@ -73,12 +73,12 @@
                 "readNovel.annotationRule": {
                     "type": "string",
                     "default": "/* $ */",
-                    "description": "注释规则（// dbpochqs）"
+                    "description": "注释规则（/* content */）"
                 },
                 "readNovel.startingPosition": {
                     "type": "number",
                     "default": 0,
-                    "description": "起始位置（行）"
+                    "description": "起始位置（行，从 0 开始）"
                 },
                 "readNovel.step": {
                     "type": "number",

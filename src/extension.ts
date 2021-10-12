@@ -140,7 +140,7 @@ const NovelReader = class {
 
     // 初次打开时，初始化文件并在文件开头插入小说片段
     registerOpen(): void {
-        let command: string = 'readNovel.setup'
+        let command: string = 'readNovel.open'
         let config: config = this.extensionConfig()
 
         let data: string[] = formattingContent(readFile(config.filePath))
