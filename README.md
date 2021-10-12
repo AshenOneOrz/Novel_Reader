@@ -1,13 +1,13 @@
 # ReadNovel README
-
+## 插件功能
+用代码注释的方式看小说
 ## 插件预览
 
 ![使用预览](./lib/preview_use.gif)
 ![命令预览](./lib/preview_command.png)
 ![设置预览](./lib/preview_setting.png)
 
-## 插件功能
-用代码注释的方式看小说
+
 ## 插件特性
 
 -   支持单行 & 多行阅读
