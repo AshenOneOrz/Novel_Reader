@@ -1,4 +1,4 @@
-# ReadNovel README
+# novelReader README
 ## 插件功能
 用代码注释的方式看小说
 ## 插件预览
@@ -20,7 +20,7 @@
 
 按下 `Crtl + Shift + P` 唤出命令面板
 
-搜索 `readNovel_open`，选中后按下 `Enter` 即可运行插件
+搜索 `novelReader_open`，选中后按下 `Enter` 即可运行插件
 
 ## 快捷键
 
@@ -30,6 +30,6 @@
 
 ---
 
-> 本插件借鉴了 `DaHuaZhuXi` 的 `ReadNovel` 插件思路
+> 本插件借鉴了 `DaHuaZhuXi` 的 `novelReader` 插件思路
 
 **Enjoy!**

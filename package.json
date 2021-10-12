@@ -1,8 +1,8 @@
 {
-    "name": "readNovel",
-    "displayName": "readNovel",
+    "name": "novelReader",
+    "displayName": "novelReader",
     "description": "TXT格式小说阅读器",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "publisher": "Zelda",
     "repository": "https://github.com/AshenOneOrz/Read_Novel",
     "engines": {
@@ -12,49 +12,49 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:readNovel.open"
+        "onCommand:novelReader.open"
     ],
     "main": "./out/extension.js",
     "contributes": {
         "commands": [
             {
-                "command": "readNovel.open",
-                "title": "readNovel_open",
+                "command": "novelReader.open",
+                "title": "novelReader_open",
                 "description": "运行"
             },
             {
-                "command": "readNovel.nextPage",
-                "title": "readNovel_nextPage",
+                "command": "novelReader.nextPage",
+                "title": "novelReader_nextPage",
                 "description": "下一页"
             },
             {
-                "command": "readNovel.prevPage",
-                "title": "readNovel_prevPage",
+                "command": "novelReader.prevPage",
+                "title": "novelReader_prevPage",
                 "description": "上一页"
             },
             {
-                "command": "readNovel.clear",
-                "title": "readNovel_clear",
+                "command": "novelReader.clear",
+                "title": "novelReader_clear",
                 "description": "清空"
             }
         ],
         "keybindings": [
             {
-                "command": "readNovel.nextPage",
+                "command": "novelReader.nextPage",
                 "key": "alt+w",
                 "mac": "cmd+w",
                 "linux": "meta+w",
                 "when": "editorTextFocus"
             },
             {
-                "command": "readNovel.prevPage",
+                "command": "novelReader.prevPage",
                 "key": "alt+q",
                 "mac": "cmd+q",
                 "linux": "meta+q",
                 "when": "editorTextFocus"
             },
             {
-                "command": "readNovel.clear",
+                "command": "novelReader.clear",
                 "key": "alt+e",
                 "mac": "cmd+e",
                 "linux": "meta+e",
@@ -62,25 +62,25 @@
             }
         ],
         "configuration": {
-            "title": "readNovel",
+            "title": "novelReader",
             "type": "object",
             "properties": {
-                "readNovel.filePath": {
+                "novelReader.filePath": {
                     "type": "string",
                     "default": "",
                     "description": "文件的绝对路径（D:/Josh/xcuo/abc.txt）"
                 },
-                "readNovel.annotationRule": {
+                "novelReader.annotationRule": {
                     "type": "string",
                     "default": "/* $ */",
                     "description": "注释规则（/* content */）"
                 },
-                "readNovel.startingPosition": {
+                "novelReader.startingPosition": {
                     "type": "number",
                     "default": 0,
                     "description": "起始位置（行，从 0 开始）"
                 },
-                "readNovel.step": {
+                "novelReader.step": {
                     "type": "number",
                     "default": 1,
                     "description": "一次看几行"

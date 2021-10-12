@@ -82,7 +82,7 @@ const NovelReader = class {
         }
 
         // true 代表更新到 vscode 全局设置中
-        await config.update('readNovel.startingPosition', n, true)
+        await config.update('novelReader.startingPosition', n, true)
     }
 
     // 返回插件设置
@@ -92,15 +92,15 @@ const NovelReader = class {
     // step 代表了步长，例如 3 就是一次看 3 行
     extensionConfig(): config {
         let config = vscode.workspace.getConfiguration()
-        // log('config.get is', config.get('readNovel'))
-        let readNovelConfig = config.get('readNovel') as config
-        log('readNovelConfig is', readNovelConfig)
-        return readNovelConfig
+        // log('config.get is', config.get('novelReader'))
+        let novelReaderConfig = config.get('novelReader') as config
+        log('novelReaderConfig is', novelReaderConfig)
+        return novelReaderConfig
     }
 
     // 下一页
     registerNextPage() {
-        let command: string = 'readNovel.nextPage'
+        let command: string = 'novelReader.nextPage'
 
         let action = async (): Promise<void> => {
             let config: config = this.extensionConfig()
@@ -114,7 +114,7 @@ const NovelReader = class {
     }
 
     registerPrevPage() {
-        let command: string = 'readNovel.prevPage'
+        let command: string = 'novelReader.prevPage'
 
         let action = async (): Promise<void> => {
             let config: config = this.extensionConfig()
@@ -128,7 +128,7 @@ const NovelReader = class {
     }
 
     registerClear() {
-        let command: string = 'readNovel.clear'
+        let command: string = 'novelReader.clear'
 
         let action = (): void => {
             this.insertNovelFragment('clear')
@@ -140,7 +140,7 @@ const NovelReader = class {
 
     // 初次打开时，初始化文件并在文件开头插入小说片段
     registerOpen(): void {
-        let command: string = 'readNovel.open'
+        let command: string = 'novelReader.open'
         let config: config = this.extensionConfig()
 
         let data: string[] = formattingContent(readFile(config.filePath))
