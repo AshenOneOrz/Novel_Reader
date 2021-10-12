@@ -2,9 +2,9 @@
 
 ## 插件预览
 
-![使用预览](./lib/使用预览.gif)
-![命令预览](./lib/命令预览.png)
-![设置预览](./lib/设置预览.png)
+![使用预览](./lib/preview_use.gif)
+![命令预览](./lib/preview_command.png)
+![设置预览](./lib/preview_setting.png)
 
 ## 插件功能
 用代码注释的方式看小说
