@@ -1,5 +1,5 @@
 interface config {
-    path: string
+    filePath: string
     annotationRule: string
     startingPosition: number
     step: number

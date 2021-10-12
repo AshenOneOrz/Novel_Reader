@@ -23,15 +23,18 @@ const NovelReader = class {
         // 因为要支持多行，所以 s 是起始位置， e 是结束位置（起始位置 + 设置的行数）
         let s = config.startingPosition
         let e = config.startingPosition + config.step
-        let fragment = this.data.slice(s, e)
+        let fragment: string | string[] = this.data.slice(s, e)
 
-        return (
-            config.annotationRule.replace('$', fragment.join('\r\n')) + '\r\n'
-        )
+        for (let i = fragment.length; i < config.step; i++) {
+            fragment.push(' ')
+        }
+
+        fragment = fragment.join('\r\n')
+        return config.annotationRule.replace('$', fragment) + '\r\n'
     }
 
     // 插入小说片段，mode 分为 insert / replace / clear，分别代表插入（首次打开插件时会执行）和替换（翻页）以及清除（老板键）
-    updateNovelFragment(mode: string): void {
+    insertNovelFragment(mode: string): void {
         // 获取当前选中的编辑窗口
         let editor: vscode.TextEditor = vscode.window
             .activeTextEditor as vscode.TextEditor
@@ -40,6 +43,8 @@ const NovelReader = class {
         editor.edit((editorContainer: vscode.TextEditorEdit) => {
             // 获取到被包装为注释形式的片段
             let fragment: string = this.getNovelFragment(config)
+            // log(fragment)
+            // log(config)
             // 光标位置
             let position: vscode.Position = new vscode.Position(0, 0)
             // 要替换的区域，从左上角的 0，0 处开始
@@ -56,7 +61,12 @@ const NovelReader = class {
                 editorContainer.replace(range, fragment)
             } else if (mode === 'clear') {
                 // 替换 range 内的片段为空字符串
-                editorContainer.replace(range, '')
+                let step = config.step
+                fragment = ''
+                for (let i = 0; i < step; i++) {
+                    fragment += '\r\n'
+                }
+                editorContainer.replace(range, fragment)
             }
         })
     }
@@ -82,19 +92,10 @@ const NovelReader = class {
     // step 代表了步长，例如 3 就是一次看 3 行
     extensionConfig(): config {
         let config = vscode.workspace.getConfiguration()
-        let path = config.get('readNovel.filePath') as string
-        let annotationRule = config.get('readNovel.annotationRule') as string
-        let startingPosition = config.get(
-            'readNovel.startingPosition',
-        ) as number
-        let step = config.get('readNovel.step') as number
-
-        return {
-            path,
-            annotationRule,
-            startingPosition,
-            step,
-        }
+        // log('config.get is', config.get('readNovel'))
+        let readNovelConfig = config.get('readNovel') as config
+        log('readNovelConfig is', readNovelConfig)
+        return readNovelConfig
     }
 
     // 下一页
@@ -105,7 +106,7 @@ const NovelReader = class {
             let config: config = this.extensionConfig()
             let step: number = config.startingPosition + config.step
             await this.updateStartingPosition(step)
-            this.updateNovelFragment('replace')
+            this.insertNovelFragment('replace')
         }
 
         let disposable: any = registerCommand(command, action)
@@ -119,7 +120,7 @@ const NovelReader = class {
             let config: config = this.extensionConfig()
             let step: number = config.startingPosition - config.step
             await this.updateStartingPosition(step)
-            this.updateNovelFragment('replace')
+            this.insertNovelFragment('replace')
         }
 
         let disposable: any = registerCommand(command, action)
@@ -130,7 +131,7 @@ const NovelReader = class {
         let command: string = 'readNovel.clear'
 
         let action = (): void => {
-            this.updateNovelFragment('clear')
+            this.insertNovelFragment('clear')
         }
 
         let disposable: any = registerCommand(command, action)
@@ -142,17 +143,15 @@ const NovelReader = class {
         let command: string = 'readNovel.setup'
         let config: config = this.extensionConfig()
 
-        let data: string[] = formattingContent(
-            readFile(this.extensionConfig().path),
-        )
+        let data: string[] = formattingContent(readFile(config.filePath))
         this.data = data
 
         let action = (): void => {
-            if (config.path === '') {
+            if (config.filePath === '') {
                 console.error('路径不能为空')
                 return
             }
-            this.updateNovelFragment('insert')
+            this.insertNovelFragment('insert')
         }
 
         let disposable: any = registerCommand(command, action)
