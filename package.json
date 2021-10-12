@@ -2,9 +2,9 @@
     "name": "novelReader",
     "displayName": "novelReader",
     "description": "TXT格式小说阅读器",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "publisher": "Zelda",
-    "repository": "https://github.com/AshenOneOrz/Read_Novel",
+    "repository": "https://github.com/AshenOneOrz/Novel_Reader",
     "engines": {
         "vscode": "^1.44.2"
     },
